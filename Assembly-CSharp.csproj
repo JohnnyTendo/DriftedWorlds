@@ -59,10 +59,17 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\EyeTracker.cs" />
     <Compile Include="Assets\MenuScript.cs" />
     <Compile Include="Assets\GameController.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\EyeTracker.cs" />
+    <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\StealthTile.cs" />
+    <Compile Include="Assets\AntiStealthScript.cs" />
+    <Compile Include="Assets\Interactable.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Materials\DepthMaskShader.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

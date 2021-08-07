@@ -341,10 +341,14 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/VSSettingsProvider.ref.dll"
+"Assets/AntiStealthScript.cs"
 "Assets/EyeTracker.cs"
 "Assets/GameController.cs"
+"Assets/Interactable.cs"
 "Assets/MenuScript.cs"
+"Assets/Scripts/CameraController.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/StealthTile.cs"
 -langversion:8.0
 
 /deterministic
