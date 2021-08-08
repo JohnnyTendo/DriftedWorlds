@@ -348,6 +348,7 @@
 "Assets/MenuScript.cs"
 "Assets/Scripts/CameraController.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/SoundQueue.cs"
 "Assets/StealthTile.cs"
 -langversion:8.0
 
