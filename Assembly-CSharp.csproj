@@ -62,12 +62,18 @@
     <Compile Include="Assets\AntiStealthScript.cs" />
     <Compile Include="Assets\Interactable.cs" />
     <Compile Include="Assets\EyeTracker.cs" />
+    <Compile Include="Assets\SoundQueue.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\MenuScript.cs" />
     <Compile Include="Assets\GameController.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\StealthTile.cs" />
-    <Compile Include="Assets\SoundQueue.cs" />
+    <Compile Include="Assets\Scripts\KeepAlive.cs" />
+    <Compile Include="Assets\SoundOperations.cs" />
+    <Compile Include="Assets\SetVolume.cs" />
+    <Compile Include="Assets\Scripts\InsaneHandler.cs" />
+    <Compile Include="Assets\SoundList.cs" />
+    <Compile Include="Assets\HouseScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Materials\DepthMaskShader.shader" />

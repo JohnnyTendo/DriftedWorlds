@@ -24,7 +24,6 @@ public class StealthTile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger: " + collision.gameObject.tag);
         if (collision.gameObject.tag == "Mask")
         {
             collider.isTrigger = hideOnCollision;
@@ -32,7 +31,6 @@ public class StealthTile : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("Trigger End: " + collision.gameObject.tag);
         if (collision.gameObject.tag == "Mask")
         {
             collider.isTrigger = !hideOnCollision;

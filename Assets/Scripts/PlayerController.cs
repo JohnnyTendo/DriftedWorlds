@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -18,7 +19,8 @@ public class PlayerController : MonoBehaviour
     #region PrivateSteeringVars
     Rigidbody2D rb2d;
     [SerializeField] private bool isLookingRight = true;
-    [SerializeField] private bool isGrounded = true;
+    [SerializeField] private bool isGrounded;
+    [SerializeField] private bool isDead = false;
     private Animator animator;
     public float maxMoveSpeed;
     public float jumpSpeed;
@@ -33,9 +35,10 @@ public class PlayerController : MonoBehaviour
     public GameObject mask;
     public bool raiseInsanity = false;
     public float insanity = 0;
-    public float maxInsanity = 10;
-    public float insanityStep = 0.0001f;
+    public float maxInsanity = 12;
+    public float insanityStep = 0.004f;
     public CircleCollider2D viewCollider;
+    public GameObject messageBox;
     #endregion
     #region Interaction
 
@@ -51,41 +54,72 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        UpdateAnimation();
-        UpdateMaskSize();
-        /*
-        if (Input.GetKeyDown(KeyCode.R) && isGrounded)
+        if (!isDead)
         {
-            viewCollider.enabled = true;
-            raiseInsanity = true;
-        }
-        */
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
-        {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            if (!isLookingRight)
+            UpdateGroundCheck();
+            UpdateAnimation();
+            UpdateMaskSize();
+
+            if (Input.GetKeyDown(KeyCode.W) && isGrounded)
             {
-                Flip();
+                rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed);
             }
-            rb2d.velocity = new Vector2(maxMoveSpeed, rb2d.velocity.y);
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            if (isLookingRight)
+            if (Input.GetKey(KeyCode.D))
             {
-                Flip();
+                if (!isLookingRight)
+                {
+                    Flip();
+                }
+                rb2d.velocity = new Vector2(maxMoveSpeed, rb2d.velocity.y);
             }
-            rb2d.velocity = new Vector2(-maxMoveSpeed, rb2d.velocity.y);
+            else if (Input.GetKey(KeyCode.A))
+            {
+                if (isLookingRight)
+                {
+                    Flip();
+                }
+                rb2d.velocity = new Vector2(-maxMoveSpeed, rb2d.velocity.y);
+            }
+        }
+        else
+        {
+
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                SceneManager.LoadScene(0, LoadSceneMode.Single);
+            }
+        }
+    }
+
+    private void UpdateGroundCheck()
+    {
+        Collider2D[] deathColliders = Physics2D.OverlapCircleAll(groundCheck.position, 0.2f, whatIsDeath);
+        for (int i = 0; i < deathColliders.Length; i++)
+        {
+            isDead = true;
+            animator.SetBool("isDead", isDead);
+            return;
+        }
+
+        Collider2D[] groundColliders = Physics2D.OverlapCircleAll(groundCheck.position, 0.2f, whatIsGround);
+        if (groundColliders.Length <= 0)
+        {
+            isGrounded = false;
+            return;
+        }
+        for (int i = 0; i < groundColliders.Length; i++)
+        {
+            if (groundColliders[i].gameObject != gameObject)
+            {
+                isGrounded = true;
+            }
         }
     }
 
     private void UpdateAnimation()
     {
         animator.SetBool("isMoving", rb2d.velocity.x != 0);
-        animator.SetBool("isDead", false);
+        animator.SetBool("isJumping", !isGrounded);
         animator.SetBool("isTakingDamage", false);
     }
 
@@ -109,32 +143,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Die()
     {
-        if (collision.gameObject.tag == "Ground")
-        {
-            isGrounded = true;
-            animator.SetBool("isJumping", false);
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            Debug.Log("is Grounded");
-            isGrounded = true;
-            animator.SetBool("isJumping", false);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            isGrounded = false;
-            animator.SetBool("isJumping", true);
-        }
+        isDead = true;
+        animator.SetBool("isDead", isDead);
     }
 
     private void Flip()
@@ -143,5 +155,16 @@ public class PlayerController : MonoBehaviour
         Vector2 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+
+    public void DamageEvent()
+    {
+        GameObject soundPlayer = GameObject.FindGameObjectWithTag("FX_Music");
+        soundPlayer.GetComponent<SoundList>().CallSoundByName("damage");
+    }
+
+    public void DieEvent()
+    {
+        messageBox.SetActive(true);
     }
 }

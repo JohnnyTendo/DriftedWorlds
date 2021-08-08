@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Ground
   - Mask
+  - BG_Music
+  - MasterController
+  - FX_Music
+  - Death
+  - MessageBox
   layers:
   - Default
   - TransparentFX
@@ -13,8 +18,8 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
+  - Background
+  - Death
   - 
   - 
   - 

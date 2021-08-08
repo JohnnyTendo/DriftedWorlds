@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 6355791131473706150}
   - component: {fileID: 6355791131473706151}
   - component: {fileID: 6355791131473706149}
+  - component: {fileID: 7814128576391894888}
   m_Layer: 0
   m_Name: BackgroundMusicSource
-  m_TagString: Untagged
+  m_TagString: BG_Music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,3 +144,17 @@ MonoBehaviour:
   sounds:
   - {fileID: 8300000, guid: 7118a784b739cdf4ba606f278201b228, type: 3}
   - {fileID: 8300000, guid: 48c062b128fbcd6429b84c7eca38eab4, type: 3}
+--- !u!114 &7814128576391894888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355791131473706072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5d8163932c8e34b86903948a02b6b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: BG_Music
+  isSingleton: 1
